@@ -28,9 +28,11 @@ function onPlayerReady(event: any) {
 }
 let videoPlayerAnimStarted = false;
 function videoInterval() {
-  console.log("executed")
   if (player.videoTitle !== "10 Hours of Nothing" && player.getDuration() !== 0 && player.getPlayerState() === 1) {
     playingVideo = true;
+  }
+  else if (player.videoTitle === "10 Hours of Nothing") {
+    playingVideo = false;
   }
   if (player.getDuration() !== 0 && player.getDuration() - player.getCurrentTime() < 8 && playingVideo) {
     if (!videoPlayerAnimStarted) {
@@ -39,7 +41,7 @@ function videoInterval() {
         videoOverlayFadeIn();
     }
   }
-  if ((player.getPlayerState() === 0 || player.getPlayerState() === -1) && playingVideo) {
+  if ((player.getPlayerState() === 0) && playingVideo) {
     stepQueue();
     if (queue.length >= 1) {
       overlayFadeOut();

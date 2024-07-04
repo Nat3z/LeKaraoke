@@ -36,28 +36,28 @@ app.whenReady().then(() => {
   });
   createWindow();
   const win = BrowserWindow.getFocusedWindow();
-  electronLocalshortcut.register(win, 'CommandOrControl+R', () => {
-    win.webContents.executeJavaScript("window.dispatchEvent(new KeyboardEvent('keydown',  {'key':'r', 'ctrlKey':true, 'char':'r', 'keyCode':82, 'code':82, 'which':82}))");
-  });
-  app.on("activate", function() {
-    // On macOS it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  win.webContents.on("frame-created", (_, { frame }) => {
+    frame.once("dom-ready", () => {
+      if (frame.url.startsWith("https://www.youtube.com/")) {
+        console.log("bad guy. created??")
+        frame.executeJavaScript(`
+              console.log("Removing bad guys")
+              new MutationObserver(() => {
+                  if(
+                      document.querySelector('div.ytp-error-content-wrap-subreason a[href*="www.youtube.com/watch?v="]')
+                  ) location.reload()
+              }).observe(document.body, { childList: true, subtree:true });
+              `);
+      }
+    });
+    electronLocalshortcut.register(win, 'CommandOrControl+R', () => {
+      win.webContents.executeJavaScript("window.dispatchEvent(new KeyboardEvent('keydown',  {'key':'r', 'ctrlKey':true, 'char':'r', 'keyCode':82, 'code':82, 'which':82}))");
+    });
+    app.on("activate", function() {
+      // On macOS it's common to re-create a window in the app when the
+      // dock icon is clicked and there are no other windows open.
+      if (BrowserWindow.getAllWindows().length === 0) createWindow();
 
-  });
-  app.on("browser-window-created", (_, win) => {
-    win.webContents.on("frame-created", (_, { frame }) => {
-      frame.once("dom-ready", () => {
-        if (frame.url.startsWith("https://www.youtube.com/")) {
-          frame.executeJavaScript(`
-                new MutationObserver(() => {
-                    if(
-                        document.querySelector('div.ytp-error-content-wrap-subreason a[href*="www.youtube.com/watch?v="]')
-                    ) location.reload()
-                }).observe(document.body, { childList: true, subtree:true });
-                `);
-        }
-      });
     });
   });
 });
