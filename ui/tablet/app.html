@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://noembed.com; 
+      script-src 'self' https://www.youtube.com; 
+      font-src 'self' https://fonts.gstatic.com;
+      img-src 'self' https://img.youtube.com;
+      frame-src 'self' https://www.youtube.com;
+      style-src 'self' https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="./tablet/app.css" />
+</head>
+
+<body>
+  <div id="app">
+    <header>
+      <img src="./tablet/logo.svg" width="150" height="150"></img>
+      <input id="search" type="text">
+      <button id="search_button">
+        <span class="material-symbols-outlined">
+          search
+        </span>
+      </button>
+      <button id="music_queue">
+        <span class=" material-symbols-outlined">
+          queue_music
+        </span>
+      </button>
+
+    </header>
+
+    <div id="results">
+      <div class="result" data-url="${item.url}">
+        <img alt="thumbnail" src="https://img.youtube.com/vi/CGbca3HeBq0/0.jpg"></img>
+        <div>
+          <h1>Bohemian Rhapsody</h1>
+          <p>Queen</p>
+        </div>
+        <button>
+          <span class="material-symbols-outlined">
+            playlist_add
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script src="./tablet/app.js"></script>
+
+</html>

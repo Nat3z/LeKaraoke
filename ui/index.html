@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://noembed.com; 
+      script-src 'self' https://www.youtube.com; 
+      font-src 'self' https://fonts.gstatic.com;
+      img-src 'self' https://i.ytimg.com;
+      frame-src 'self' https://www.youtube.com;
+      style-src 'self' https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
+  <script src="qrious.js"></script>
+</head>
+
+<body>
+  <main>
+    <img src="./banner.svg" width="1000" height="150"></img>
+    <h1>Select a Song on the Tablet</h1>
+  </main>
+  <div id="video-player">
+    <iframe id="player" src="https://www.youtube.com/embed/fx2Z5ZD_Rbo?si=ujKB8pxflpjzkB5G&enablejsapi=1;controls=0"
+      title="YouTube video player" frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen></iframe>
+    <div id="up-next-overlay">
+      <img src="./logo.svg" width="200" height="150" id="logo"></img>
+      <img width="300" height="200" id="thumbnail"></img>
+      <div id="up-next-text">
+        <h1>Up Next</h1>
+        <h2>Bohemian Rhapsody - Queen</h2>
+      </div>
+      <h4>Songs Left in Queue: 2</h4>
+    </div>
+  </div>
+</body>
+
+<script src="../dist/renderer.js"></script>
+
+</html>
