@@ -19,6 +19,12 @@
 </head>
 
 <body>
+  <div style="display: none;" id="alert" accent="hide">
+    <span class="material-symbols-outlined">
+      warning
+    </span>
+    <h1>You are editing.</h1>
+  </div>
   <div id="app">
     <header>
       <button>
@@ -33,9 +39,25 @@
       </button>
 
     </header>
-
+    <header id="queue-edit">
+      <button disabled>
+        <span class="material-symbols-outlined">
+          delete
+        </span>
+      </button>
+      <button disabled>
+        <span class="material-symbols-outlined">
+          check_circle
+        </span>
+      </button>
+      <button disabled>
+        <span class="material-symbols-outlined">
+          move_down
+        </span>
+      </button>
+    </header>
     <div id="results">
-      <div class="result" data-url="https://youtube.com/watch?v=${id}">
+      <div class="result" data-url="https://youtube.com/watch?v=${id}" selected="true">
         <img alt="thumbnail" src="https://img.youtube.com/vi/fJ9rUzIMcZQ/0.jpg"></img>
         <div>
           <h1>Bohemian Rhapsody</h1>

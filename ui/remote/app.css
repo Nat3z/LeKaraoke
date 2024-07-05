@@ -21,6 +21,21 @@ h1, h2, h3, h4, h5 {
   background-size: cover;
 }
 
+#queue-edit {
+  button {
+    width: 25rem;
+    height: 10rem;
+    .material-symbols-outlined {
+      font-size: 8em;
+    }
+
+    background: rgba(148, 148, 148, 0.3)
+  }
+  button:disabled {
+    background: rgba(69, 69, 69, 0.05)
+  }
+}
+
 header {
   display: flex;
   justify-content: center;
@@ -63,7 +78,7 @@ header {
   button:first-child {
     margin-right: auto;
   }
-  button:nth-child(2) {
+  button:last-child {
     margin-left: auto;
   }
 }
@@ -82,9 +97,13 @@ header {
   align-items: center;
   width: 100%;
   gap: 1rem;
+  margin-top: 1rem;
   overflow-y: auto;
 }
 
+.result[selected="true"] {
+  background: linear-gradient(180deg, rgba(173,216,230,0.1) 0%, rgba(100,149,237,0.3) 100%);
+}  
 .result {
   display: flex;
   flex-direction: column;
@@ -125,4 +144,34 @@ header {
     }
   }
 
+}
+
+#alert {
+  display: flex;
+  position: fixed;
+  top: 0;
+  width: 80vw;
+  left: 9vw;
+  align-items: center;
+  flex-direction: row;
+  padding: 1rem;
+  border-radius: 12px;
+  background: #1E92F4;
+  gap: 1rem;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  .material-symbols-outlined {
+    font-size: 5em;
+  }
+  h1 {
+    font-size: 4em;
+  }
+
+  &[accent="warn"] {
+    background: #eed202;
+    color: black;
+  }
+  &[accent="hide"] {
+    display: none;
+  }
 }
