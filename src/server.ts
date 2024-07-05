@@ -5,6 +5,8 @@ import { Innertube } from "youtubei.js"
 let youtube: Innertube;
 
 export let SongQueue: string[] = [];
+export let VideoMap = new Map<string, { title: string, creator: string }>();
+
 export function updateSongQueue(queue: string[]) {
   SongQueue = queue;
 }
@@ -12,6 +14,7 @@ export function updateSongQueue(queue: string[]) {
 const app = express();
 const server = createServer(app);
 
+app.use(express.json());
 app.use("/tablet", tabletRoute);
 
 app.get("/", (req, res) => {
@@ -31,6 +34,9 @@ app.get("/search", async (req, res) => {
   res.json(results);
 })
 
+app.get("/queue", (req, res) => {
+  res.json({ queue: SongQueue, map: Object.fromEntries(VideoMap) });
+});
 app.post("/add_to_queue", (req, res) => {
   if (!req.query.url || typeof req.query.url !== "string") {
     return res.status(400).send("missing query parameter 'url'");
@@ -40,6 +46,8 @@ app.post("/add_to_queue", (req, res) => {
   if (!id) {
     return res.status(400).send("invalid youtube video URL");
   }
+
+  VideoMap.set(id, { title: req.body.title, creator: req.body.creator })
   SongQueue.push(id);
   res.send("1");
 });

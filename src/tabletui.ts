@@ -44,6 +44,10 @@ document.querySelector('#search_button').addEventListener('click', function() {
         console.log("CLICKED ADD TO PLAYLSIT!")
         fetch('./add_to_queue?url=' + url, {
           method: 'POST',
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ title, creator })
         }).then(function(response) {
           return response.text();
         }).then(function(text) {
@@ -60,3 +64,30 @@ document.querySelector('#search_button').addEventListener('click', function() {
     });
   });
 });
+
+function getCurrentQueue() {
+  fetch('./queue').then(function(response) {
+    return response.json();
+  }).then(function(text) {
+    let queue = text.queue;
+    let map = text.map;
+    let playlist = document.querySelector('#results');
+    playlist.innerHTML = '';
+
+    queue.forEach(function(id: string) {
+      let item = map[id];
+      playlist.innerHTML += `
+        <div class="result" data-url="https://youtube.com/watch?v=${id}">
+          <img alt="thumbnail" src="https://img.youtube.com/vi/${id}/0.jpg"></img>
+          <div>
+            <h1>${item.title}</h1>
+            <p>${item.creator}</p>
+          </div>
+        </div>
+      `;
+    });
+  });
+}
+
+document.querySelector("#music_queue").addEventListener('click', getCurrentQueue);
+getCurrentQueue();
