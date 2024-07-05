@@ -1,6 +1,7 @@
 import express from "express";
 import { createServer } from "http";
 import tabletRoute from "./server.tablet";
+import remoteRoute from "./server.remote";
 import { Innertube } from "youtubei.js"
 let youtube: Innertube;
 
@@ -16,6 +17,7 @@ const server = createServer(app);
 
 app.use(express.json());
 app.use("/tablet", tabletRoute);
+app.use("/remote", remoteRoute);
 
 app.get("/", (req, res) => {
   res.send("hello world!")

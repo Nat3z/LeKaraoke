@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://noembed.com; 
+      script-src 'self' https://www.youtube.com; 
+      font-src 'self' https://fonts.gstatic.com;
+      img-src 'self' https://img.youtube.com;
+      frame-src 'self' https://www.youtube.com;
+      style-src 'self' https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="./remote/app.css" />
+</head>
+
+<body>
+  <div id="app">
+    <header>
+      <button>
+        <span class="material-symbols-outlined">
+          skip_next
+        </span>
+      </button>
+      <button>
+        <span class="material-symbols-outlined">
+          closed_caption
+        </span>
+      </button>
+
+    </header>
+
+    <div id="results">
+      <div class="result" data-url="https://youtube.com/watch?v=${id}">
+        <img alt="thumbnail" src="https://img.youtube.com/vi/${id}/0.jpg"></img>
+        <div>
+          <h1>${item.title}</h1>
+          <p>${item.creator}</p>
+        </div>
+      </div>
+    </div>
+</body>
+
+<script>
+  var exports = {};
+</script>
+<script type="module" src="./remote/app.js"></script>
+
+</html>
