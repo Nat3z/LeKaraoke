@@ -13,23 +13,25 @@ document.querySelector('#search_button').addEventListener('click', function() {
     text.forEach(function(item: any) {
       // parse the youtube id from the url
       // add elipses to title if it's too long
-      item.title = item.title.length > 30 ? item.title.slice(0, 30) + '...' : item.title;
-      let id = item.url.split('v=')[1].split('&')[0];
-      results.innerHTML += `
-        <div class="result" data-url="${item.url}">
-          <img alt="thumbnail" src="https://img.youtube.com/vi/${id}/0.jpg"></img>
-          <div>
-            <h1>${item.title}</h1>
-            <p>${item.creator}</p>
+      let title = item.title.text!!;
+      title = title.length > 30 ? title.slice(0, 30) + '...' : title;
+      let id = item.id;
+      if (item.author)
+        results.innerHTML += `
+          <div class="result" data-url="https://youtube.com/watch?v=${id}">
+            <img alt="thumbnail" src="https://img.youtube.com/vi/${id}/0.jpg"></img>
+            <div>
+              <h1>${title}</h1>
+              <p>${item.author.name}</p>
+            </div>
+           
+            <button class="add_to_playlist">
+              <span class="material-symbols-outlined">
+              playlist_add
+              </span>
+            </button>
           </div>
-         
-          <button class="add_to_playlist">
-            <span class="material-symbols-outlined">
-            playlist_add
-            </span>
-          </button>
-        </div>
-      `;
+        `;
     });
 
     // add event listeners to the add to playlist buttons
@@ -39,7 +41,7 @@ document.querySelector('#search_button').addEventListener('click', function() {
         let url = result.getAttribute('data-url');
         let title = result.querySelector('h1').textContent;
         let creator = result.querySelector('p').textContent;
-
+        console.log("CLICKED ADD TO PLAYLSIT!")
         fetch('./add_to_queue?url=' + url, {
           method: 'POST',
         }).then(function(response) {
